@@ -12,7 +12,7 @@
 - Скачиваем исходники openssl ```wget https://www.openssl.org/source/latest.tar.gz```
 - Распаковываем rpm пакет (распаковываются src и spec файл): ```rpm -i nginx-1.18.0-2.el7.ngx.src.rpm```
 - Копируем в место распаковки rpm пакета исходники openssl: ```mv latest.tar.gz /root/rpmbuild/```
-- Переходим в каталог rpmbuild ``cd /root/rpmbuild```
+- Переходим в каталог rpmbuild ```cd /root/rpmbuild```
 
 В папке SPECS лежит spec-файл. Файл, который описывает что и как собирать.
 - Открываем файл ```nano SPECS/nginx.spec``` и добавляем в секцию %build необходимый нам модуль OpenSSL:
@@ -40,7 +40,6 @@ total 2796
 - В location / в файле /etc/nginx/conf.d/default.conf добавим директиву autoindex on.
 ```
 autoindex on;
-
 ```
 - Проверяем синтаксис ```nginx -t``` и ```nginx -s reload```
 - Теперь можем просмотреть наши пакеты через HTTP - ```lynx http://localhost/repo/```
@@ -53,4 +52,4 @@ gpgcheck=0
 enabled=1
 ```
 - Когда мы удаляем или добавляем пакеты в наш репозиторий, нам необходимо выполнить ```createrepo /usr/share/nginx/html/repo/``` и ```createrepo --update /usr/share/nginx/html/repo/```, 
-после чего на всякий случай можем выполнить ```yum clean all``` и теперь ```yum list --showduplicates | grep otus```
+
